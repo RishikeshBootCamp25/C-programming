@@ -1,42 +1,65 @@
-// Calculator that runs in loop until user exits
-
 #include <stdio.h>
-
-int add(int a, int b) { return a + b; }
-int subtract(int a, int b) { return a - b; }
-int multiply(int a, int b) { return a * b; }
-float divide(int a, int b) {
-    if (b == 0) {
-        printf("Cannot divide by zero!\n");
-        return 0;
-    }
-    return (float)a / b;
-}
-
+// Function declarations
+float add(float a, float b);
+float subtract(float a, float b);
+float multiply(float a, float b);
+float divide(float a, float b);
 int main() {
-    int choice, a, b;
-    char cont;
-
-    do {
-        printf("\nEnter two numbers: ");
-        scanf("%d %d", &a, &b);
-
-        printf("Menu:\n1. Add\n2. Subtract\n3. Multiply\n4. Divide\n");
-        printf("Enter your choice: ");
+int choice;
+float num1, num2, result;
+    printf("Basic Calculator using Functions\n");
+    printf("================================\n");
+    printf("1. Addition\n");
+    printf("2. Subtraction\n");
+    printf("3. Multiplication\n");
+    printf("4. Division\n");
+    printf("5. Exit\n");
+    while (1) {
+        printf("\nEnter your choice (1-5): ");
         scanf("%d", &choice);
-
-        switch (choice) {
-            case 1: printf("Result = %d\n", add(a, b)); break;
-            case 2: printf("Result = %d\n", subtract(a, b)); break;
-            case 3: printf("Result = %d\n", multiply(a, b)); break;
-            case 4: printf("Result = %.2f\n", divide(a, b)); break;
-            default: printf("Invalid choice!\n");
+        if (choice == 5) {
+            printf("Exiting the program. Goodbye!\n");
+            break;
         }
-
-        printf("Do you want to continue? (y/n): ");
-        scanf(" %c", &cont);
-
-    } while (cont == 'y' || cont == 'Y');
-
+        printf("Enter two numbers: ");
+        scanf("%f %f", &num1, &num2);
+        switch (choice) {
+            case 1:
+                result = add(num1, num2);
+                printf("Result: %.2f\n", result);
+                break;
+            case 2:
+                result = subtract(num1, num2);
+                printf("Result: %.2f\n", result);
+                break;
+            case 3:
+                result = multiply(num1, num2);
+                printf("Result: %.2f\n", result);
+                break;
+            case 4:
+                if (num2 != 0) {
+                    result = divide(num1, num2);
+                    printf("Result: %.2f\n", result);
+                } else {
+                    printf("Error: Division by zero is not allowed.\n");
+                }
+                break;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
     return 0;
+}
+// Function definitions
+float add(float a, float b) {
+    return a + b;
+}
+float subtract(float a, float b) {
+    return a - b;
+}
+float multiply(float a, float b) {
+    return a * b;
+}
+float divide(float a, float b) {
+    return a / b;
 }
